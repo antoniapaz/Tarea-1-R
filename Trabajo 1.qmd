@@ -1,0 +1,14 @@
+---
+title: "Caída del Simce 2do Medio en la Región Metropolitana: Posibles Causas y Soluciones para la educación en Chile"
+author: "Antonia Moreno"
+format: html
+editor: visual
+bibliography: trabajo-1-R.bib
+link-citations: true
+---
+
+## Introducción
+
+El Sistema de Medición de la Calidad de la Educación, o más conocido como SIMCE, es un instrumento para dar a conocer el rendimiento académico escolar en nuestro país, este se realiza todos los años en cursos específicos, siendo 2do medio el último grado en rendirlo. Este a partir del año 2015 denotó un aumento año a año en su promedio de las pruebas de Lectura y Matemática, llegando así al 2017 con un puntaje de 251 y 270 respectivamente. Luego de esto el último SIMCE del 2018 dejó ver bajas en estos puntajes, llegando, por ejemplo, a tener un 50% de alumnos cursantes con una Lectura insuficiente [ver @sylviaeyzaguirre2020] y luego de una pandemia y un estallido social en que no se realizaron estas pruebas, el pasado 2022 dio nuevamente resultados más bajos de lo esperado (pensando en la anterior alza) llegando a 247 en Lectura y 259 en Matemáticas, lo que a pesar de no ser una baja tan significativa, es preocupante el decenso del puntaje sobre todo en estos cursos ya que se encuentran a 2 años de rendir la PSU o elegir una alternativa profesional, siendo un tema crítico evaluar las razones para pronta solución y mejora en la educacion chilena.
+
+En esta investigación se busca entonces indagar sobre las posibles causas de esta caída en los puntajes, mirando tanto las políticas educacionales [ver @víctorcastilloriquelme2016] como contexto social y/o económico que afectan directamente en los resultados \[ver @orlandomella2016\]. Así entonces decidí realizar una investigación con diseño transversal, recolectando datos de los puntajes de cada año con una muestra de estudiantes de la Región Metropolitana cursantes de 2do medio, decidí realizarlo con datos de este curso en específico por la importancia que tiene para la base de la educación superior y asi entender la problemática desde dentro para crear en un futuro mejores políticas educativas. Todo esto teniendo en cuenta que "el SIMCE no es causante de la desigualdad y la estigmatización social presente en el sistema educativo chileno, y que lo correcto es mantener la prueba y optimizar las situaciones de los colegios menos favorecidos para que logren subir su desempeño." [ver @cristiancabalín2019]

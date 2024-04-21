@@ -1,0 +1,126 @@
+---
+title: "Caída del Simce 2do Medio en la Región Metropolitana: Posibles Causas y Soluciones para la educación en Chile"
+author: "Antonia Moreno"
+format: html
+editor: visual
+bibliography: Trabajo2.bib
+link-citations: true
+---
+
+```{r}
+pacman::p_load(sjlabelled,
+               dplyr, #Manipulacion de datos
+              stargazer, #Tablas
+              sjmisc, # Tablas
+              summarytools, # Tablas
+              kableExtra, #Tablas
+              sjPlot, #Tablas y gráficos
+              corrplot, # Correlaciones
+              sessioninfo, # Información de la sesión de trabajo
+              ggplot2) # Para la mayoría de los gráficos
+```
+
+```{r}
+load("C:/Users/apazm/OneDrive/Escritorio/RSTUDIO/IPO/Input/Simce_2015.RData",)
+load("C:/Users/apazm/OneDrive/Escritorio/RSTUDIO/IPO/Input/Simce_2016.RData")
+load("C:/Users/apazm/OneDrive/Escritorio/RSTUDIO/IPO/Input/Simce_2017.RData")
+load("C:/Users/apazm/OneDrive/Escritorio/RSTUDIO/IPO/Input/Simce_2018.RData")
+load("C:/Users/apazm/OneDrive/Escritorio/RSTUDIO/IPO/Input/Simce_2022.RData")
+
+```
+
+## Introducción
+
+El Sistema de Medición de la Calidad de la Educación, o más conocido como SIMCE, es un instrumento para dar a conocer el rendimiento académico escolar en nuestro país, este se realiza todos los años en cursos específicos, siendo 2do medio el último grado en rendirlo. Este a partir del año 2015 denotó un aumento año a año en su promedio de las pruebas de Lectura y Matemática, llegando así al 2017 con un puntaje de 251 y 270 respectivamente. Luego de esto el último SIMCE del 2018 dejó ver bajas en estos puntajes, llegando, por ejemplo, a tener un 50% de alumnos cursantes con una Lectura insuficiente [ver @sylviaeyzaguirreEducacionTiemposPandemia2020] y luego de una pandemia y un estallido social en que no se realizaron estas pruebas, el pasado 2022 dio nuevamente resultados más bajos de lo esperado (pensando en la anterior alza) llegando a 247 en Lectura y 259 en Matemáticas, lo que a pesar de no ser una baja tan significativa, es preocupante el decenso del puntaje sobre todo en estos cursos ya que se encuentran a 2 años de rendir la PSU o elegir una alternativa profesional, siendo un tema crítico evaluar las razones para pronta solución y mejora en la educacion chilena.
+
+En esta investigación se busca entonces indagar sobre las posibles causas de esta caída en los puntajes, mirando tanto las políticas educacionales [ver @victorcastilloriquelmeMedicionIntegralidadEducativa2016] como contexto social y/o económico que afectan directamente en los resultados [ver @orlandomella12AnosReforma2016]. Así entonces decidí realizar una investigación con diseño transversal, recolectando datos de los puntajes de cada año con una muestra de estudiantes de la Región Metropolitana cursantes de 2do medio, decidí realizarlo con datos de este curso en específico por la importancia que tiene para la base de la educación superior y asi entender la problemática desde dentro para crear en un futuro mejores políticas educativas. Todo esto teniendo en cuenta que "el SIMCE no es causante de la desigualdad y la estigmatización social presente en el sistema educativo chileno, y que lo correcto es mantener la prueba y optimizar las situaciones de los colegios menos favorecidos para que logren subir su desempeño." [ver @cristiancabalinDiscursosMediaticosSobre2019]
+
+```{r}
+#promedios 2015
+promedio_lenguaje_2015 <- mean(Simce_2015$promedio_lenguaje, na.rm = TRUE)
+promedio_matematica_2015 <- mean(Simce_2015$promedio_matematica, na.rm = TRUE)
+
+#promedios 2016
+promedio_lenguaje_2016 <- mean(Simce_2016$promedio_lenguaje, na.rm = TRUE)
+promedio_matematica_2016 <- mean(Simce_2016$promedio_matematica, na.rm = TRUE)
+
+#promedios 2017
+promedio_lenguaje_2017 <- mean(Simce_2017$promedio_lenguaje, na.rm = TRUE)
+promedio_matematica_2017 <- mean(Simce_2017$promedio_matematica, na.rm = TRUE)
+
+#promedios 2018
+promedio_lenguaje_2018 <- mean(Simce_2018$promedio_lenguaje, na.rm = TRUE)
+promedio_matematica_2018 <- mean(Simce_2018$promedio_matematica, na.rm = TRUE)
+
+#promedios 2022
+promedio_lenguaje_2022 <- mean(Simce_2022$promedio_lenguaje, na.rm = TRUE)
+promedio_matematica_2022 <- mean(Simce_2022$promedio_matematica, na.rm = TRUE)
+```
+
+## Desarrollo
+
+La caída del sistema SIMCE, al menos en la Región Metropolitana, comenzó el 2018 y aunque fue con pocos puntos de diferencia, marco un antes y un despues ya que no se han podido volver a obtener puntajes mas altos. Es más, hasta antes del 2018 los puntajes iban en subida, y luego de un contexto de tensión social, estallido social y luego pandemia los estudiantes han comenzado a bajar su promedio en estas pruebas de medición.
+
+```{r}
+sjmisc::descr(Simce_2017,
+      show = c(
+        "range", "mean", "sd"))%>%
+      kable(.,"markdown")
+
+```
+
+```{r}
+sjmisc::descr(Simce_2018,
+      show = c(
+        "range", "mean", "sd"))%>%
+      kable(.,"markdown")
+
+```
+
+```{r}
+sjmisc::descr(Simce_2022,
+      show = c(
+        "range", "mean", "sd"))%>%
+      kable(.,"markdown")
+
+```
+
+Primeramente en el 2018 ya se estaban viviendo tensiones sociales en temas políticos y económicos del país, habiendo marchas y quejas por el aumento en la desigualdad y del costo de vida, esta tensión no se vivió tan solo en la calle, si no que existia también la movilización secundaria y, en varias oportunidades, estas movilizaciones incluian paro/tomas de establecimientosy la famosa "cimarra" para la asistencia a marchas, por lo que el foco del estudiantado fue desviado.
+
+Esto terminó por explotar el año 2019 desencadenando un estallido social, en dónde debido a su magnitud se paralizaron clases, pruebas e incluso el SIMCE.
+
+```{r}
+library(ggplot2)
+
+ggplot() +
+  geom_bar(data = Simce_2015, aes(x = as.factor(2015), y = promedio_matematica_2015, fill = "Matemáticas"), stat = "identity", position = "dodge") +
+  geom_bar(data = Simce_2015, aes(x = as.factor(2015), y = promedio_lenguaje_2015, fill = "Lenguaje"), stat = "identity", position = "dodge") +
+  geom_bar(data = Simce_2016, aes(x = as.factor(2016), y = promedio_matematica_2016, fill = "Matemáticas"), stat = "identity", position = "dodge") +
+  geom_bar(data = Simce_2016, aes(x = as.factor(2016), y = promedio_lenguaje_2016, fill = "Lenguaje"), stat = "identity", position = "dodge") +
+  geom_bar(data = Simce_2017, aes(x = as.factor(2017), y = promedio_matematica_2017, fill = "Matemáticas"), stat = "identity", position = "dodge") +
+  geom_bar(data = Simce_2017, aes(x = as.factor(2017), y = promedio_lenguaje_2017, fill = "Lenguaje"), stat = "identity", position = "dodge") +
+  geom_bar(data = Simce_2018, aes(x = as.factor(2018), y = promedio_matematica_2018, fill = "Matemáticas"), stat = "identity", position = "dodge") +
+  geom_bar(data = Simce_2018, aes(x = as.factor(2018), y = promedio_lenguaje_2018, fill = "Lenguaje"), stat = "identity", position = "dodge") +
+  geom_bar(data = Simce_2022, aes(x = as.factor(2022), y = promedio_matematica_2022, fill = "Matemáticas"), stat = "identity", position = "dodge") +
+  geom_bar(data = Simce_2022, aes(x = as.factor(2022), y = promedio_lenguaje_2022, fill = "Lenguaje"), stat = "identity", position = "dodge") +
+  labs(x = "Año", y = "Puntaje", title = " Promedio Puntajes Anuales 2do Medio en la RM") +
+  scale_fill_manual(values = c("Matemáticas" = "blue", "Lenguaje" = "red")) +
+  scale_x_discrete(limits = c("2015", "2016", "2017", "2018", "2022")) +
+  scale_y_continuous(limits = c(0, 271),  # Establecer los límites del eje Y
+                     breaks = seq(0, 271, by = 50),
+                     labels = function(x) format(x, scientific = FALSE))
+
+
+```
+
+En este gráfico se puede notar como anterior a esto el puntaje en los estudiantes se encontraba en alza año a año, hasta llegar al 2018. Luego de esto, por el estallido social y luego por la pandemia del Covid-19 las pruebas fueron suspendidas, por lo que en estos años no existe cifra a comparar, pero esta más que claro que influyeron de manera negativa en los alumnos ya que al retomar la prueba el año 2022 los puntajes volvieron a bajar.
+
+Es interesante además notar la brecha que existe entre los promedios de Lenguaje y Matemáticas, siendo esta segunda prueba mejor rendida que la de Lectura, basada en la comprensión lectora de los estudiantes. Esto es algo bastante problemático ya que además como relata [@sylviaeyzaguirreEducacionTiemposPandemia2020] la mitad de los estudiantes esta en el rango de Lectura Insuficiente, lo que significa que la comprensión lectora básica en los alumnos de 2do medio es deficiente. Esto nos lleva a otra problemática basandonos en las pocas herrramientas que poseen los estudiantes para enfrentarse a un texto de lectura y su análisis, ya que una buena lectura es necesaria para toda la vida sea cual sea el rumbo profesional que tome la persona. Para esto una posible solución debe ser implementar talleres de lectura para todos los cursos, incluyendo planes anuales desde cursos más pequeños para mejorar las habilidades lectoras.
+
+Además con la pandemia, aparte de la alta deserción escolar, se incorporaron probemas como la mala alimentación en los estudiantes, pérdida de habilidades sociales y cognitivas y aumento en la brecha de aprendizaje [ver @sylviaeyzaguirreEducacionTiemposPandemia2020], todo esto se relaciona directamente con una baja en los puntajes, presentando dificultades al volver precencialmente, a pesar que se hizo de manera gradual.
+
+Tampoco podemos esperar que los estudiantes vuelvan con el mismo desempeño escolar luego de estas problemáticas en sus casas durante 2 años en cuarentena, pero si se pueden implementar medidas de apoyo mayores, y tener siempre un Plan B para en casos de crisis sepamos como actuar y apoyar a nuestros estudiantes, ya que en estos dos casos nombrados ni los colegios ni el gobierno supieron actuar rápido por no tener medidas preventivas o planes de acción.
+
+## Conclusión
+
+Podemos ver entonces con los resultados del sistema SIMCE que los estudiantes de 2do Medio en la Región Metropolitana han bajado año a año su rendimiento escolar por razones mayoritariamente contextuales/sociales, como fueron la pandemia y el estallido social del 2019. Esto nos lleva a pensar que son necesarias urgentes reformas educativas, ya que, a tan solo 2 años de la educación superior, no es posible que los alumnos esten aprendiendo cada vez menos. Y, tomando en cuenta que las dificultades academicas se presentan aún más en los colegios municipales y sectores de menos recursos [ver @orlandomella12AnosReforma2016] es importante buscar soluciones para disminuir la brecha de distintos tipos de colegios y comunas en la región. Para esto son necesarias políticas más alla del ámbito educacional, invirtiendo más recursos para el contexto social de las personas y así de los estudiantes.
